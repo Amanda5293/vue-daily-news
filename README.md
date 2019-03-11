@@ -1,4 +1,4 @@
-# vue-daily-news
+# y
 
 > A Vue.js project
 

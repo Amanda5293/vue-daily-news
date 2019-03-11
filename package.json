@@ -1,5 +1,5 @@
 {
-  "name": "vue-daily-news",
+  "name": "y",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "Amanda5293 <Amanda5293@outlook.com>",
@@ -11,8 +11,6 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "fastclick": "^1.0.6",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
@@ -71,18 +69,5 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ],
-  "main": ".eslintrc.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Amanda5293/vue-daily-news.git"
-  },
-  "keywords": [
-    "vue"
-  ],
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Amanda5293/vue-daily-news/issues"
-  },
-  "homepage": "https://github.com/Amanda5293/vue-daily-news#readme"
+  ]
 }
