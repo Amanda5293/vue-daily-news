@@ -1,23 +1,26 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <com-header></com-header>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import ComHeader from '@/components/Header'
 export default {
-  name: 'App'
+  components: {
+    ComHeader
+  }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="stylus" scoped>
+@import '~styles/varibles.styl'
+.v-enter-active,
+.v-leave-active{
+  transition all .8s
+}
+.v-enter,
+.v-leave-to{
+  transform translateX(1rem)
 }
 </style>
