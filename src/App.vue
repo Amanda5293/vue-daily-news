@@ -15,12 +15,4 @@ export default {
 </script>
 <style lang="stylus" scoped>
 @import '~styles/varibles.styl'
-.v-enter-active,
-.v-leave-active{
-  transition all .8s
-}
-.v-enter,
-.v-leave-to{
-  transform translateX(1rem)
-}
 </style>
