@@ -1,38 +1,94 @@
 <template>
-  <div class="main-container">
-    <div v-if="latestData">
-        <daily-report :dailyStories="latestData.stories"
-                  :date="latestData.date"></daily-report>
+  <div class="main-container" ref="wrapper">
+    <div class="content">
+      <article-swiper v-if="topStories" :swiperList="topStories"></article-swiper>
+      <div v-if="articleList.length >0 " class="list-area">
+          <article-list :storyList="articleList"></article-list>
+      </div>
+      <loading v-show="showLoading"></loading>
     </div>
   </div>
 </template>
 <script>
 import axios from 'axios'
-import DailyReport from '@/components/DailyReport'
+import BScroll from 'better-scroll'
+import ArticleList from '@/components/ArticleList'
+import Loading from '@/components/Loading'
+import ArticleSwiper from '@/components/ArticleSwiper'
+import { getDay } from '@/utils/common.js'
 export default {
   data () {
     return {
-      latestData: null,
-      showErr: false
+      articleList: [],
+      topStories: null,
+      showErr: false,
+      showLoading: false,
+      totalPreDays: 0,
+      finish: false
+    }
+  },
+  computed: {
+    msgTxt () {
+      return this.finish ? 'no more data' : (this.showLoading ? 'loading' : '')
     }
   },
   components: {
-    DailyReport
+    ArticleList,
+    Loading,
+    ArticleSwiper
   },
   created () {
     this.getLatestData()
   },
+  mounted () {
+    this.bindScroll()
+  },
   methods: {
     getLatestData () {
-      axios
-        .get('api/4/news/latest')
+      this.showLoading = true
+      axios.get('api/4/news/latest')
         .then(res => {
+          let storiesData = res.data
           console.log(res.data)
-          this.latestData = res.data
+          this.pushArticleList(storiesData)
+          this.topStories = storiesData['top_stories']
+          this.showLoading = false
         })
         .catch(err => {
+          this.showLoading = false
           console.log(err)
         })
+    },
+    pushArticleList (data) {
+      this.articleList.push({
+        date: data.date,
+        stories: data.stories
+      })
+    },
+    loadMoreData () {
+      this.showLoading = true
+      let date = getDay(--this.totalPreDays)
+      axios.get(`api/4/news/before/${date}`)
+        .then(res => {
+          this.pushArticleList(res.data)
+          this.showLoading = false
+          this.scroll.finishPullUp()
+          this.scroll.refresh()
+        })
+        .catch(err => {
+          this.showLoading = false
+          console.log(err)
+        })
+    },
+    bindScroll () {
+      this.scroll = new BScroll(this.$refs.wrapper, {
+        click: true,
+        scrollY: true,
+        pullUpLoad: {
+          threshold: -30 // 当上拉距离超过30px时触发 pullingUp 事件
+        }
+      })
+      this.scroll.on('pullingUp', this.loadMoreData)
     }
   }
 }
@@ -40,5 +96,13 @@ export default {
 <style lang="stylus" scoped>
 @import '~styles/varibles.styl'
 .main-container
-  padding .5rem
+  position fixed
+  top $height48
+  bottom 0
+  left 0
+  right 0
+  overflow hidden
+  padding .5rem 0 1rem
+  .list-area
+    padding 0 .5rem
 </style>

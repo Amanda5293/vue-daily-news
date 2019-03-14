@@ -12,7 +12,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: MainPage
+      redirect: '/main'
     },
     {
       path: '/main',
@@ -28,6 +28,7 @@ export default new Router({
     },
     {
       path: '/article/:id',
+      name: 'article',
       component: ArticleDetail
     }
   ]
