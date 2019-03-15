@@ -50,7 +50,7 @@ export default {
   .item-container
     width 100%
     height 0
-    padding-bottom 78vmin
+    padding-bottom 78%
     overflow hidden
     .swiper-img
       width 100%

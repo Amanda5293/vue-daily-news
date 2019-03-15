@@ -1,17 +1,21 @@
 <template>
-  <div class="main-container" ref="wrapper">
-    <div class="content">
-      <article-swiper v-if="topStories" :swiperList="topStories"></article-swiper>
-      <div v-if="articleList.length >0 " class="list-area">
-          <article-list :storyList="articleList"></article-list>
+  <div>
+    <com-header></com-header>
+    <div class="main-container" ref="wrapper">
+      <div class="content">
+        <article-swiper v-if="topStories" :swiperList="topStories"></article-swiper>
+        <div v-if="articleList.length >0 " class="list-area">
+            <article-list :storyList="articleList"></article-list>
+        </div>
+        <loading v-show="showLoading"></loading>
       </div>
-      <loading v-show="showLoading"></loading>
     </div>
   </div>
 </template>
 <script>
 import axios from 'axios'
 import BScroll from 'better-scroll'
+import ComHeader from '@/components/Header'
 import ArticleList from '@/components/ArticleList'
 import Loading from '@/components/Loading'
 import ArticleSwiper from '@/components/ArticleSwiper'
@@ -27,15 +31,11 @@ export default {
       finish: false
     }
   },
-  computed: {
-    msgTxt () {
-      return this.finish ? 'no more data' : (this.showLoading ? 'loading' : '')
-    }
-  },
   components: {
     ArticleList,
     Loading,
-    ArticleSwiper
+    ArticleSwiper,
+    ComHeader
   },
   created () {
     this.getLatestData()

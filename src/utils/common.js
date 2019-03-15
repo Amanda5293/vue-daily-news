@@ -44,8 +44,23 @@ function getDay (day) {
   return `${year}${month}${date}`
 }
 
+function loadCss (url) {
+  let css = document.createElement('link')
+  css.href = url
+  css.rel = 'stylesheet'
+  css.type = 'text/css'
+  document.head.appendChild(css)
+  return css
+}
+
+function removeCss (linkDom) {
+  document.head.removeChild(linkDom)
+}
+
 export {
   getImageUrl,
   handleDateTitle,
-  getDay
+  getDay,
+  loadCss,
+  removeCss
 }

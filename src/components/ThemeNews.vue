@@ -1,10 +1,14 @@
 <template>
   <div id="app">
-    ThemeNews
+    <com-header></com-header>
   </div>
 </template>
 <script>
+import ComHeader from '@/components/Header'
 export default {
+  components: {
+    ComHeader
+  }
 }
 </script>
 <style lang="stylus" scoped>
