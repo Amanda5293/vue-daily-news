@@ -27,7 +27,7 @@ export default {
       topStories: null,
       showErr: false,
       showLoading: false,
-      totalPreDays: 0,
+      totalPreDays: 1,
       finish: false
     }
   },
@@ -66,24 +66,27 @@ export default {
       })
     },
     loadMoreData () {
-      this.showLoading = true
-      let date = getDay(--this.totalPreDays)
-      axios.get(`api/4/news/before/${date}`)
-        .then(res => {
-          this.pushArticleList(res.data)
-          this.showLoading = false
-          this.scroll.finishPullUp()
-          this.scroll.refresh()
-        })
-        .catch(err => {
-          this.showLoading = false
-          console.log(err)
-        })
+      if (!this.showLoading) {
+        this.showLoading = true
+        let date = getDay(--this.totalPreDays)
+        axios.get(`api/4/news/before/${date}`)
+          .then(res => {
+            this.pushArticleList(res.data)
+            this.scroll.finishPullUp()
+            this.scroll.refresh()
+            this.showLoading = false
+          })
+          .catch(err => {
+            this.showLoading = false
+            console.log(err)
+          })
+      }
     },
     bindScroll () {
       this.scroll = new BScroll(this.$refs.wrapper, {
         click: true,
         scrollY: true,
+        probeType: 1,
         pullUpLoad: {
           threshold: -30 // 当上拉距离超过30px时触发 pullingUp 事件
         }

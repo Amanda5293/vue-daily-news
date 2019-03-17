@@ -4,6 +4,7 @@ import MainPage from '@/components/MainPage'
 import ThemeNews from '@/components/ThemeNews'
 import PersonInfo from '@/components/PersonInfo'
 import ArticleDetail from '@/components/ArticleDetail'
+import ArticleComments from '@/components/ArticleComments'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/article/:id',
       name: 'article',
       component: ArticleDetail
+    },
+    {
+      path: '/comments/:articleId',
+      name: 'comments',
+      component: ArticleComments
     }
   ]
 })

@@ -42,5 +42,5 @@ export default {
     line-height $height36
     font-size 1.3rem
     text-indent 1rem
-    color #DCDCDC
+    color #bbbbbb
 </style>
