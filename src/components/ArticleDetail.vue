@@ -7,8 +7,8 @@
                 :imgArr = "collectImgs"
                 @statusChange = "handleCollect">
         </icon-change>
-        <comments-icon class="operate-item"
-                       :count="commentsCount"
+        <comments-icon class="operate-item" v-if="commentsInfo"
+                       :countInfo="commentsInfo"
                        :articleId="id">
         </comments-icon>
         <think-good class="operate-item"
@@ -18,15 +18,13 @@
         </think-good>
       </div>
     </article-detail-header>
-    <div ref="articleWrapper">
-      <div v-if="articleInfo">
+    <div v-if="articleInfo">
         <article-img-title :imgUrl="articleInfo.image"
                         :imgSource="articleInfo['image_source']"
                         :title="articleInfo.title"></article-img-title>
         <div class="article-content" v-html="content"></div>
-      </div>
-      <loading v-else></loading>
     </div>
+    <loading class="loading" v-else></loading>
   </div>
 </template>
 <script>
@@ -49,7 +47,7 @@ export default {
       linkDom: [],
       isCollect: false,
       isThinkGood: false,
-      commentsCount: 0,
+      commentsInfo: null,
       popularity: 0,
       collectImgs: ['collect.png', 'collected.png']
     }
@@ -71,7 +69,6 @@ export default {
       'handleStoreThinkGood'
     ]),
     getArticleDetail () {
-      this.id = this.$route.params.id
       axios.get(`/api/4/news/${this.id}`)
         .then((res) => {
           this.articleInfo = res.data
@@ -87,7 +84,11 @@ export default {
       axios.get(`/api/4/story-extra/${this.id}`)
         .then((res) => {
           let data = res.data
-          this.commentsCount = data.comments
+          this.commentsInfo = {
+            totalCount: data.comments,
+            shortCount: data['short_comments'],
+            longCount: data['long_comments']
+          }
           this.handlePrefer(data)
         })
     },
@@ -112,20 +113,18 @@ export default {
       }
       this.content = tempStr
     },
-    handleCollect () {
-      let isCollect = !this.isCollect
-      this.isCollect = isCollect
+    handleCollect (value) {
+      this.isCollect = value
       let article = this.articleInfo
-      this.handleStoreCollect({isCollect, article})
+      this.handleStoreCollect({isCollect: value, article})
     },
-    handleThinkGood () {
-      let isGood = !this.isThinkGood
-      this.isThinkGood = isGood
-      let curCount = isGood ? ++this.popularity : this.popularity
+    handleThinkGood (value, count) {
+      this.isThinkGood = value
+      this.popularity = count
       let article = this.articleInfo
       this.handleStoreThinkGood({
-        isGood: isGood,
-        curCount: curCount,
+        isGood: value,
+        curCount: count,
         article
       })
     },
@@ -138,6 +137,7 @@ export default {
     }
   },
   created () {
+    this.id = this.$route.params.id
     this.getArticleDetail()
     this.getArticleExtraInfo()
   },
@@ -153,4 +153,10 @@ export default {
   flex-direction row-reverse
   .operate-item
     margin-left 10px
+.loading
+  position fixed
+  top 50%
+  height 48px
+  margin-top -24px
+  left 0
 </style>

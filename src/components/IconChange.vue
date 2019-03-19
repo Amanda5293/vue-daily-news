@@ -1,7 +1,6 @@
 <template>
-  <div class="collect-container" @click="handleCollect">
-     <img :src="require('@/assets/images/' + imgArr[0])" v-show="!curStatus">
-     <img :src="require('@/assets/images/' + imgArr[1])" v-show="curStatus">
+  <div class="collect-container" @click="handleChange"
+      :style="{backgroundImage:'url('+ require('@/assets/images/' + curImg) +')'}">
   </div>
 </template>
 <script>
@@ -11,24 +10,23 @@ export default {
     imgArr: Array
   },
   computed: {
-    curStatus () {
-      return this.curSelected
+    curImg () {
+      return this.curSelected ? this.imgArr[1] : this.imgArr[0]
     }
   },
   methods: {
-    handleCollect () {
-      this.$emit('statusChange')
+    handleChange () {
+      this.$emit('statusChange', !this.curSelected)
     }
   }
 }
 </script>
 <style lang="stylus" scoped>
 .collect-container
+  position relative
+  z-index 1
   width 48px
   height 48px
-  line-height 48px
-  text-align center
-  cursor pointer
-  img
-    vertical-align middle
+  background-repeat no-repeat
+  background-position center center
 </style>

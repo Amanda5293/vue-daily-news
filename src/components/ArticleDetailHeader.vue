@@ -1,14 +1,28 @@
 <template>
-  <transition name="fade">
-    <div class="detail-header-container" v-show="showTitle">
-      <back class="back"></back>
-      <slot></slot>
-    </div>
-  </transition>
+  <div>
+    <transition name="fade" v-if="hasTransition">
+      <div class="detail-header-container" v-show="showTitle">
+        <back class="back"></back>
+        <slot></slot>
+      </div>
+    </transition>
+    <div v-else>
+      <div class="detail-header-container" v-show="showTitle">
+          <back class="back"></back>
+          <slot></slot>
+        </div>
+      </div>
+  </div>
 </template>
 <script>
 import Back from '@/components/Back'
 export default {
+  props: {
+    hasTransition: {
+      type: Boolean,
+      default: true
+    }
+  },
   components: {
     Back
   },
@@ -28,10 +42,14 @@ export default {
     }
   },
   created () {
-    window.addEventListener('scroll', this.scrollChange, false)
+    if (this.hasTransition) {
+      window.addEventListener('scroll', this.scrollChange, false)
+    }
   },
   destroyed () {
-    window.removeEventListener('scroll', this.scrollChange, false)
+    if (this.hasTransition) {
+      window.removeEventListener('scroll', this.scrollChange, false)
+    }
   }
 }
 </script>

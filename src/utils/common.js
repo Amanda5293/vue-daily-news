@@ -45,6 +45,22 @@ function getDay (day) {
   return `${year}${month}${date}`
 }
 
+/**
+ * @param {根据时间戳(s)格式化日期}
+ */
+function formatDate (number) {
+  let dateTime = new Date(number * 1000)
+  let year = dateTime.getFullYear()
+  let month = dateTime.getMonth() + 1
+  month = month > 9 ? month : '0' + month
+  let date = dateTime.getDate()
+  date = date > 9 ? date : '0' + date
+  let time = dateTime.toTimeString().substr(0, 8)
+  return `${year}-${month}-${date} ${time}`
+}
+/**
+ * @param {加载css}
+ */
 function loadCss (url) {
   let css = document.createElement('link')
   css.href = url
@@ -62,6 +78,7 @@ export {
   getImageUrl,
   handleDateTitle,
   getDay,
+  formatDate,
   loadCss,
   removeCss
 }

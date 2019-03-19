@@ -1,15 +1,17 @@
 <template>
   <div class="comments-container" @click="handleClick">
-    <img src="@/assets/images/comments.png" class="icon">
-    <span class="count">{{count}}</span>
+    <img src="@/assets/images/comments.png" class="icon"><span class="count">{{countInfo.totalCount}}</span>
   </div>
 </template>
 <script>
 export default {
-  props: ['count', 'articleId'],
+  props: ['countInfo', 'articleId'],
   methods: {
     handleClick () {
-      this.$router.push({path: `/comments/${this.articleId}`})
+      this.$router.push({
+        path: `/comments/${this.articleId}`,
+        query: this.countInfo
+      })
     }
   }
 }

@@ -2,7 +2,9 @@
   <div id="app" class="header-container">
         <router-link class="tab-item" tag="div" to="/main">首页</router-link>
         <router-link class="tab-item" tag="div" to="/theme">主题日报</router-link>
-        <router-link class="tab-item" tag="div" to="/person">个人信息</router-link>
+        <router-link class="tab-item" tag="div" to="/person">
+          <img src="@/assets/images/person.png">
+        </router-link>
   </div>
 </template>
 <script>
@@ -22,7 +24,9 @@ export default {
       width 33.33%
       text-align center
       line-height  $height48
-      cursor pointer
+      font-weight 600
+      img
+        margin 6px 0
       &.router-link-active
       &:hover
         position:relative
@@ -36,5 +40,4 @@ export default {
           margin-left -5px
           background-color $borderColor
           border-radius 50%
-
 </style>

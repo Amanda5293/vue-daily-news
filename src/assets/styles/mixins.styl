@@ -17,7 +17,17 @@ mutiEllipsis()
     padding-left .1rem
     background-image linear-gradient(left,rgba(255,255,255,0.2),rgba(255,255,255,1) 55%)
 
-border-1px($color)
+border-1px-top($color)
+  position:relative
+  &:after
+    display:block
+    content:' '
+    position:absolute
+    top:0
+    left:0
+    width:100%
+    border-bottom:1px solid $color
+border-1px-bottom($color)
   position:relative
   &:after
     display:block
@@ -27,31 +37,3 @@ border-1px($color)
     left:0
     width:100%
     border-top:1px solid $color
-border-1px-top($color)
-  position:relative
-  &:before
-    display:block
-    content:' '
-    width:100%
-    bottom:0
-    left:0
-    border-top:1px solid $color
-border-1px-bottom($color)
-  position:relative
-  &:before
-    display:block
-    content:' '
-    width:100%
-    bottom:0
-    left:0
-    border-bottom:1px solid $color
-border-1px-right($color)
-  position:relative
-  &:before
-    display:block
-    position:absolute
-    content:''
-    height:100%
-    right:0
-    top:0
-    border-right:1px solid $color

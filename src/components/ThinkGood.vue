@@ -14,15 +14,22 @@ export default {
   props: ['thinkGood', 'count'],
   data () {
     return {
-      thinkGoodImgs: ['good-white.png', 'good.png']
+      thinkGoodImgs: ['good-white.png', 'good.png'],
+      curGood: this.thinkGood
+    }
+  },
+  computed: {
+    curCount () {
+      return this.count
     }
   },
   components: {
     IconChange
   },
   methods: {
-    handleThinkGood () {
-      this.$emit('thinkGoodChange')
+    handleThinkGood (value) {
+      let count = value ? this.curCount + 1 : this.curCount - 1
+      this.$emit('thinkGoodChange', value, count)
     }
   }
 }
