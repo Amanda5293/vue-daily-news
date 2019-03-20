@@ -14,10 +14,7 @@
 
 ## Preview
 
-<img src="https://github.com/Amanda5293/vue-daily-news/blob/master/src/assets/images/screenshots/main.jpg" width="300" style="display:inline-block" alt="main">
-<img src="https://github.com/Amanda5293/vue-daily-news/blob/master/src/assets/images/screenshots/article.jpg" width="300" style="display:inline-block" alt="article">
-<img src="https://github.com/Amanda5293/vue-daily-news/blob/master/src/assets/images/screenshots/comments.jpg" width="300" style="display:inline-block" alt="comments">
-<img src="https://github.com/Amanda5293/vue-daily-news/blob/master/src/assets/images/screenshots/prefer.jpg" width="300" style="display:inline-block"alt="prefer">
+<img src="https://github.com/Amanda5293/vue-daily-news/blob/master/src/assets/images/screenshots/main.jpg" width="300"  alt="main"><img src="https://github.com/Amanda5293/vue-daily-news/blob/master/src/assets/images/screenshots/article.jpg" width="300"  alt="article"><img src="https://github.com/Amanda5293/vue-daily-news/blob/master/src/assets/images/screenshots/comments.jpg" width="300"  alt="comments"><img src="https://github.com/Amanda5293/vue-daily-news/blob/master/src/assets/images/screenshots/prefer.jpg" width="300"alt="prefer">
 
 ## Build Setup
 
