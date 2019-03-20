@@ -54,7 +54,7 @@ export default {
 <style lang="stylus" scoped>
 @import '~styles/varibles.styl'
 @import '~styles/mixins.styl'
-.comments-container
+.extend-container
   .count-container
     display flex
     justify-content space-between

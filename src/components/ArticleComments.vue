@@ -3,27 +3,30 @@
     <article-detail-header :hasTransition="false">
       <span>{{title}}</span>
     </article-detail-header>
-    <div class="comments-list">
-      <extend-list :extendTitle="longTitle" v-if="longComments"
-                   :dataList="longComments">
-        <comment v-for="item in longComments"
-                :key="item.id"
-                :commentInfo="item">
-        </comment>
-      </extend-list>
-      <extend-list :extendTitle="shortTitle" v-if="shortComments"
-                   :dataList="shortComments">
-        <comment v-for="item in shortComments"
-                :key="item.id"
-                :commentInfo="item">
-        </comment>
-      </extend-list>
-      <loading class="loading" v-else></loading>
+    <div class="comments-list" ref="commentsWrapper">
+      <div>
+        <extend-list :extendTitle="longTitle" v-if="longComments"
+                    :dataList="longComments">
+          <comment v-for="item in longComments"
+                  :key="item.id"
+                  :commentInfo="item">
+          </comment>
+        </extend-list>
+        <extend-list :extendTitle="shortTitle" v-if="shortComments"
+                    :dataList="shortComments">
+          <comment v-for="item in shortComments"
+                  :key="item.id"
+                  :commentInfo="item">
+          </comment>
+        </extend-list>
+        <loading class="loading" v-else></loading>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import axios from 'axios'
+import BScroll from 'better-scroll'
 import ArticleDetailHeader from '@/components/ArticleDetailHeader'
 import ExtendList from '@/components/ExtendList'
 import Comment from '@/components/Comment'
@@ -56,6 +59,9 @@ export default {
     this.getLongComments()
     this.getShortComments()
   },
+  mounted () {
+    this.bindScroll()
+  },
   methods: {
     getLongComments () {
       axios.get(`/api/4/story/${this.articleId}/long-comments`)
@@ -81,6 +87,13 @@ export default {
       } else {
         return longCount > 20 ? '部分长评' : `${this.longComments.length}条长评`
       }
+    },
+    bindScroll () {
+      this.scroll = new BScroll(this.$refs.commentsWrapper, {
+        click: true,
+        scrollY: true,
+        probeType: 1
+      })
     }
   }
 }
@@ -93,6 +106,7 @@ export default {
     position absolute
     left 0
     right 0
+    bottom 0
     top $height48
     .loading
       position fixed

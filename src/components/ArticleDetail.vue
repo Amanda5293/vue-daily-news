@@ -76,7 +76,6 @@ export default {
           this.cssArray = this.articleInfo.css
           this.loadContentCss()
           this.handleContent()
-          console.log(this.articleInfo)
         })
         .catch(err => console.log(err))
     },
@@ -124,8 +123,8 @@ export default {
       let article = this.articleInfo
       this.handleStoreThinkGood({
         isGood: value,
-        curCount: count,
-        article
+        article,
+        curCount: count
       })
     },
     loadContentCss () {
@@ -137,7 +136,7 @@ export default {
     }
   },
   created () {
-    this.id = this.$route.params.id
+    this.id = parseInt(this.$route.params.id)
     this.getArticleDetail()
     this.getArticleExtraInfo()
   },

@@ -49,14 +49,9 @@ export default {
       axios.get('api/4/news/latest')
         .then(res => {
           let storiesData = res.data
-          console.log(res.data)
           this.pushArticleList(storiesData)
           this.topStories = storiesData['top_stories']
           this.showLoading = false
-        })
-        .catch(err => {
-          this.showLoading = false
-          console.log(err)
         })
     },
     pushArticleList (data) {
@@ -75,10 +70,6 @@ export default {
             this.scroll.finishPullUp()
             this.scroll.refresh()
             this.showLoading = false
-          })
-          .catch(err => {
-            this.showLoading = false
-            console.log(err)
           })
       }
     },

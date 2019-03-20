@@ -1,7 +1,6 @@
 <template>
   <div id="app" class="header-container">
         <router-link class="tab-item" tag="div" to="/main">首页</router-link>
-        <router-link class="tab-item" tag="div" to="/theme">主题日报</router-link>
         <router-link class="tab-item" tag="div" to="/person">
           <img src="@/assets/images/person.png">
         </router-link>

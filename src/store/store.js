@@ -1,11 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import state from './state'
 Vue.use(Vuex)
-
-const state = {
-  collectArticles: [],
-  goodArticles: []
-}
 
 const store = new Vuex.Store({
   state,
@@ -30,6 +26,10 @@ const store = new Vuex.Store({
           state.collectArticles.push(article)
         }
       }
+      let storageData = {
+        data: state.collectArticles
+      }
+      localStorage.setItem('collect', JSON.stringify(storageData))
     },
     handleStoreThinkGood (state, param) {
       let { isGood, curCount, article } = param
@@ -46,6 +46,11 @@ const store = new Vuex.Store({
           })
         }
       }
+      console.log('state.goodArticles', state.goodArticles)
+      let storageData = {
+        data: state.goodArticles
+      }
+      localStorage.setItem('thinkGood', JSON.stringify(storageData))
     }
   }
 })

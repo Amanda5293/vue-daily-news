@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import MainPage from '@/components/MainPage'
-import ThemeNews from '@/components/ThemeNews'
-import PersonInfo from '@/components/PersonInfo'
+import PersonPrefer from '@/components/PersonPrefer'
 import ArticleDetail from '@/components/ArticleDetail'
 import ArticleComments from '@/components/ArticleComments'
 
@@ -20,12 +19,8 @@ export default new Router({
       component: MainPage
     },
     {
-      path: '/theme',
-      component: ThemeNews
-    },
-    {
       path: '/person',
-      component: PersonInfo
+      component: PersonPrefer
     },
     {
       path: '/article/:id',

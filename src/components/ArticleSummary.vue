@@ -1,5 +1,6 @@
 <template>
-  <router-link class="item-container" tag="div" :to="{name:'article',params:{id:summary.id}}">
+  <router-link class="item-container" tag="div"
+               :to="{name:'article',params:{id:summary.id}}">
     <div class="summary-area">
       <span>{{summary.title}}</span>
     </div>
